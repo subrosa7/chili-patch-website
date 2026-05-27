@@ -1,0 +1,7 @@
+{
+  "name": "chili-patch-website",
+  "version": "1.0.0",
+  "dependencies": {
+    "stripe": "^14.25.0"
+  }
+}

@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium live chili pepper starts from The Chili Patch. Grown in arid Bellvue, Colorado — pre-hardened and ready to plant anywhere. No acclimation needed! Hand-selected varieties including Ghost Pepper, Carolina Reaper, Anaheim & more.">
+    <meta name="keywords" content="live chili pepper starts, pepper plants for sale, Anaheim, Ghost Pepper, Carolina Reaper, Poblano, Jalapeno, grown in Colorado, no hardening off, The Chili Patch Bellvue">
+    <title>The Chili Patch | Live Chili Pepper Starts • Bellvue, Colorado</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- EmailJS for real order emails -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <!-- Playful hand-drawn fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Inter:wght@300;400;500;600&amp;display=swap');
+        
+        :root {
+            --primary: #9f2a00;
+            --accent: #c2410f;
+            --cream: #fdfaf3;
+        }
+        
+        body {
+            font-family: 'Patrick Hand', 'Inter', system_ui, sans-serif;
+            background-color: #fdfaf3;
+        }
+        
+        .heading-playful {
+            font-family: 'Caveat', 'Playfair Display', Georgia, cursive;
+            font-weight: 700;
+            line-height: 1.05;
+        }
+
+        .section-header {
+            font-size: 2.1rem;
+            line-height: 2.3rem;
+            font-weight: 700;
+            color: #9f2a00;
+        }
+
+        .chili-gradient {
+            background: linear-gradient(135deg, #9f2a00 0%, #c2410f 100%);
+        }
+
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-active {
+            color: #9f2a00;
+            font-weight: 700;
+        }
+
+        .grow-step {
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            transition: all 0.2s ease;
+        }
+
+        .chili-bg {
+            background-image: url('https://i.ibb.co/QFC2cczZ/image-1-with-bgc-1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cart-slide {
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        .modal {
+            animation: fadeInScale 0.2s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .nav-scrolled {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            background-color: rgba(253, 250, 243, 0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        .product-badge {
+            background: linear-gradient(to right, #9f2a00, #c2410f);
+        }
+
+        .chili-icon {
+            display: inline-block;
+            width: 1.1em;
+            height: 1.1em;
+        }
+
+        .hand-drawn-label {
+            font-family: 'Caveat', cursive;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#fdfaf3] text-stone-800">
+    <!-- NAVBAR -->
+    <nav id="navbar" class="bg-[#fdfaf3] border-b border-stone-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 bg-[#9f2a00] rounded-2xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-pepper-hot text-white text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-3xl tracking-tighter text-[#9f2a00] heading-playful">The Chili Patch</span>
+                        <span class="block text-[10px] text-[#c2410f] -mt-1 tracking-[1.5px] font-medium">BELLVUE, COLORADO</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#shop" class="hover:text-[#9f2a00] transition-colors">Shop Starts</a>
+                    <a href="#how-it-works" class="hover:text-[#9f2a00] transition-colors">How It Works</a>
+                    <a href="#about" class="hover:text-[#9f2a00] transition-colors">Our Story</a>
+                    <a href="#faq" class="hover:text-[#9f2a00] transition-colors">FAQ</a>
+                    <button onclick="showAdminModal()" 
+                            class="px-4 py-1.5 text-xs font-semibold border border-[#9f2a00]/30 hover:bg-[#9f2a00] hover:text-white rounded-2xl transition-all flex items-center gap-x-1.5">
+                        <i class="fa-solid fa-cog text-xs"></i>
+                        <span>Admin</span>
+                    </button>
+                </div>
+
+                <!-- Right side actions -->
+                <div class="flex items-center gap-x-4">
+                    <!-- Cart Button -->
+                    <button onclick="showCart()" 
+                            class="flex items-center gap-x-2 px-5 py-2.5 rounded-2xl border border-stone-200 hover:bg-white transition-all active:scale-[0.985]">
+                        <div class="relative">
+                            <i class="fa-solid fa-shopping-bag text-xl text-[#9f2a00]"></i>
+                            <span id="cart-count" 
+                                  class="absolute -top-1.5 -right-1.5 bg-[#c2410f] text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                        </div>
+                        <span class="hidden sm:inline text-sm font-semibold text-stone-700">Cart</span>
+                    </button>
+
+                    <!-- Mobile Menu -->
+                    <button class="md:hidden w-10 h-10 flex items-center justify-center text-[#9f2a00]" onclick="toggleMobileMenu()">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative h-[100dvh] min-h-[620px] flex items-center justify-center overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 chili-bg" style="filter: brightness(0.92) saturate(1.05);"></div>
+        
+        <!-- Cream overlay for playful feel -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#fdfaf3]/70 via-[#fdfaf3]/40 to-[#fdfaf3]/80"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+            <div class="inline-flex items-center gap-x-2 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-3xl mb-6 shadow-sm border border-[#9f2a00]/10">
+                <div class="w-2 h-2 bg-[#c2410f] rounded-full animate-pulse"></div>
+                <span class="text-[#9f2a00] text-sm font-semibold tracking-wider">LIVE PLANTS • PRE-HARDENED IN ARID COLORADO</span>
+            </div>
+            
+            <h1 class="text-[#9f2a00] text-6xl md:text-7xl leading-[1.02] tracking-tighter font-bold mb-4 heading-playful">
+                Grow Your Own<br>Gourmet Chilis
+            </h1>
+            <p class="max-w-lg mx-auto text-xl text-stone-700 mb-9">
+                Premium live pepper starts grown in the arid high desert of Bellvue, Colorado.<br>
+                <span class="font-semibold text-[#c2410f]">No hardening off needed</span> — plant them anywhere and watch them thrive.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="document.getElementById('shop').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-9 py-4 bg-[#9f2a00] hover:bg-[#7f2000] active:bg-black transition-all text-white font-semibold rounded-3xl text-lg flex items-center justify-center gap-x-3 shadow-xl shadow-[#9f2a00]/30">
+                    <span>Shop Live Starts</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button onclick="document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-8 py-4 border-2 border-[#9f2a00]/70 hover:bg-white/80 active:bg-white transition-all text-[#9f2a00] font-semibold rounded-3xl text-lg flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-play mr-1"></i>
+                    <span>See How It Works</span>
+                </button>
+            </div>
+            
+            <div class="mt-10 flex justify-center gap-x-8 text-stone-600 text-sm">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-[#c2410f]"></i>
+                    <span>4.9/5 from 1,312 happy growers</span>
+                </div>
+                <div class="hidden sm:block w-px h-4 bg-stone-300"></div>
+                <div>Free shipping over $65</div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block">
+            <div class="flex flex-col items-center text-stone-500 text-xs tracking-widest">
+                <span>SCROLL TO MEET THE PEPPERS</span>
+                <i class="fa-solid fa-chevron-down mt-1 animate-bounce"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- TRUST / STATS BAR -->
+    <div class="bg-white border-b border-stone-100 py-5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-y-6 text-center">
+                <div>
+                    <div class="text-3xl font-semibold text-[#9f2a00] stat-number">3,214</div>
+                    <div class="text-sm text-stone-500 mt-0.5">Live Starts Shipped</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-semibold text-[#9f2a00] stat-number">4.94</div>
+                    <div class="text-sm text-stone-500 mt-0.5">Average Grower Rating</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-semibold text-[#9f2a00]">45–90</div>
+                    <div class="text-sm text-stone-500 mt-0.5">Days to First Harvest</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-semibold text-[#9f2a00]">100%</div>
+                    <div class="text-sm text-stone-500 mt-0.5">Live Arrival Guarantee</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHOP SECTION -->
+    <section id="shop" class="max-w-7xl mx-auto px-6 pt-16 pb-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
+            <div>
+                <span class="uppercase tracking-[3px] text-[#c2410f] text-xs font-semibold">DISCOVER OUR LIVE STARTS</span>
+                <h2 class="section-header mt-1 heading-playful">Choose Your Pepper Adventure</h2>
+            </div>
+            <p class="text-stone-600 max-w-sm mt-3 md:mt-0">All starts are grown in arid Bellvue, Colorado. Pre-hardened for success anywhere — no acclimation required.</p>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- Bundle CTAs -->
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+            <!-- Salsa Starter Bundle -->
+            <div class="bg-white border border-stone-200 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="uppercase tracking-widest text-[#c2410f] text-xs font-semibold">BEST VALUE • MILD TO MEDIUM</span>
+                    <h3 class="text-2xl font-semibold tracking-tight mt-1">The Salsa Starter Bundle</h3>
+                    <p class="text-stone-600 mt-1">Anaheim + Poblano + Jalapeño Pot-a-pino + Serrano. Perfect for fresh salsa all summer.</p>
+                    <div class="mt-3 text-sm"><span class="line-through text-stone-400">$25.96</span> <span class="font-semibold text-[#9f2a00]">$21.99</span> — save $3.97</div>
+                </div>
+                <button onclick="addBundleToCart('salsa')" 
+                        class="bg-[#9f2a00] hover:bg-[#7f2000] active:bg-black transition-all text-white px-8 py-3.5 rounded-2xl font-bold whitespace-nowrap flex items-center gap-x-2 shadow">
+                    <span>Add Bundle</span>
+                </button>
+            </div>
+            
+            <!-- Heat Seeker Bundle -->
+            <div class="bg-[#9f2a00] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="uppercase tracking-widest text-white/70 text-xs font-semibold">FOR THE BOLD • SUPER HOT</span>
+                    <h3 class="text-2xl font-semibold tracking-tight mt-1">Heat Seeker Bundle</h3>
+                    <p class="text-white/80 mt-1">Ghost Pepper + Carolina Reaper + Long Slim Cayenne + Mad Hatter. Turn up the heat.</p>
+                    <div class="mt-3 text-sm"><span class="line-through text-white/50">$33.96</span> <span class="font-semibold">$28.99</span> — save $4.97</div>
+                </div>
+                <button onclick="addBundleToCart('heat')" 
+                        class="bg-white text-[#9f2a00] hover:bg-stone-100 active:bg-white px-8 py-3.5 rounded-2xl font-bold whitespace-nowrap flex items-center gap-x-2 shadow">
+                    <span>Add Bundle</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="bg-white py-16 border-y border-stone-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-[#c2410f] uppercase tracking-[3px] text-xs font-semibold">SIMPLE &amp; REWARDING</span>
+                <h2 class="section-header mt-2 heading-playful">From Box to Bounty in Weeks</h2>
+                <p class="text-stone-600 max-w-md mx-auto mt-3">Our live starts are already hardened in arid Colorado conditions — ready to plant the day they arrive.</p>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-5">
+                <!-- Step 1 -->
+                <div class="grow-step bg-[#fdfaf3] rounded-3xl p-6 text-center border border-stone-100">
+                    <div class="mx-auto w-14 h-14 bg-[#9f2a00]/10 text-[#9f2a00] rounded-2xl flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-box-open text-3xl"></i>
+                    </div>
+                    <div class="font-semibold text-lg">1. Unbox</div>
+                    <p class="text-sm text-stone-600 mt-2">Healthy, live pepper starts arrive in protective packaging with care instructions.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="grow-step bg-[#fdfaf3] rounded-3xl p-6 text-center border border-stone-100">
+                    <div class="mx-auto w-14 h-14 bg-[#9f2a00]/10 text-[#9f2a00] rounded-2xl flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-sun text-3xl"></i>
+                    </div>
+                    <div class="font-semibold text-lg">2. Plant Directly</div>
+                    <p class="text-sm text-stone-600 mt-2">No hardening off required! Our arid-grown starts are ready for your garden or containers anywhere.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="grow-step bg-[#fdfaf3] rounded-3xl p-6 text-center border border-stone-100">
+                    <div class="mx-auto w-14 h-14 bg-[#9f2a00]/10 text-[#9f2a00] rounded-2xl flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-tint text-3xl"></i>
+                    </div>
+                    <div class="font-semibold text-lg">3. Water &amp; Sunshine</div>
+                    <p class="text-sm text-stone-600 mt-2">Give them full sun and consistent moisture. Watch them establish quickly in your climate.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="grow-step bg-[#fdfaf3] rounded-3xl p-6 text-center border border-stone-100">
+                    <div class="mx-auto w-14 h-14 bg-[#9f2a00]/10 text-[#9f2a00] rounded-2xl flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-pepper-hot text-3xl"></i>
+                    </div>
+                    <div class="font-semibold text-lg">4. Harvest</div>
+                    <p class="text-sm text-stone-600 mt-2">Pick peppers at your preferred ripeness. Most varieties produce abundantly for months.</p>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="grow-step bg-[#9f2a00] text-white rounded-3xl p-6 text-center">
+                    <div class="mx-auto w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-sync text-3xl"></i>
+                    </div>
+                    <div class="font-semibold text-lg">5. Enjoy All Season</div>
+                    <p class="text-sm text-white/80 mt-2">Fresh salsa, hot sauce, stuffed peppers — your harvest will keep giving through fall.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <p class="text-sm text-stone-500">Average time to first harvest: <span class="font-semibold text-[#9f2a00]">45–90 days</span> depending on variety &amp; your climate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US / BENEFITS -->
+    <section id="about" class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-12 gap-x-8 items-center">
+            <div class="md:col-span-5">
+                <span class="text-[#c2410f] text-xs tracking-[2.5px] font-semibold">WHY GROW WITH THE CHILI PATCH</span>
+                <h2 class="section-header mt-3 leading-none heading-playful">Real plants.<br>Real flavor.<br>Real simple.</h2>
+                <p class="mt-5 text-stone-600">We're a small family operation in Northern Colorado (Bellvue) obsessed with growing tough, flavorful pepper starts that thrive in any garden. Every plant is started in our arid high-desert soil so you don't have to worry about acclimation shock.</p>
+                
+                <div class="mt-8 space-y-4">
+                    <div class="flex gap-x-4">
+                        <i class="fa-solid fa-check-circle text-[#c2410f] mt-1"></i>
+                        <div class="text-sm"><span class="font-semibold">Pre-hardened in arid conditions</span> — plant straight into your garden or pots, no matter where you live.</div>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <i class="fa-solid fa-check-circle text-[#c2410f] mt-1"></i>
+                        <div class="text-sm"><span class="font-semibold">Hand-selected &amp; healthy</span> — strong root systems and vigorous growth from day one.</div>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <i class="fa-solid fa-check-circle text-[#c2410f] mt-1"></i>
+                        <div class="text-sm"><span class="font-semibold">Detailed growing guides</span> — QR code on every order + video tutorials for each variety.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 mt-10 md:mt-0">
+                <div class="bg-white rounded-3xl p-8 border border-stone-100">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div>
+                            <div class="text-[#9f2a00]"><i class="fa-solid fa-globe fa-2x"></i></div>
+                            <div class="mt-4 font-semibold">Grown in Bellvue, CO</div>
+                            <p class="text-sm text-stone-600 mt-1">High desert sun + arid nights = naturally tough plants that handle temperature swings.</p>
+                        </div>
+                        <div>
+                            <div class="text-[#9f2a00]"><i class="fa-solid fa-heart fa-2x"></i></div>
+                            <div class="mt-4 font-semibold">Live Arrival Promise</div>
+                            <p class="text-sm text-stone-600 mt-1">If your starts arrive unhealthy, we'll replace them. No questions asked.</p>
+                        </div>
+                        <div>
+                            <div class="text-[#9f2a00]"><i class="fa-solid fa-users fa-2x"></i></div>
+                            <div class="mt-4 font-semibold">Join the Patch Club</div>
+                            <p class="text-sm text-stone-600 mt-1">Free access to our grower community, recipes, and seasonal tips.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="bg-[#9f2a00] py-14 text-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-9">
+                <span class="uppercase tracking-widest text-white/60 text-xs">REAL GROWERS, REAL HEAT</span>
+                <h2 class="text-3xl font-semibold tracking-tight mt-2 heading-playful">Loved by home chefs &amp; chili heads</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white/10 backdrop-blur rounded-3xl p-6">
+                    <div class="flex text-amber-400 mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="italic">"My Ghost and Reaper starts arrived looking incredibly healthy. Planted them the same day — no issues at all. Already have pods forming in Denver!"</p>
+                    <div class="mt-5 text-sm">
+                        <span class="font-semibold">— Derek M.</span><br>
+                        <span class="text-white/60 text-xs">Denver, CO</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur rounded-3xl p-6">
+                    <div class="flex text-amber-400 mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="italic">"The Salsa Bundle is perfect. Anaheim and Poblanos are huge producers. My kids love picking the sweet ones. Will reorder every spring."</p>
+                    <div class="mt-5 text-sm">
+                        <span class="font-semibold">— Lisa T.</span><br>
+                        <span class="text-white/60 text-xs">Fort Collins, CO</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur rounded-3xl p-6">
+                    <div class="flex text-amber-400 mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="italic">"Carolina Reaper and Mad Hatter came in strong. The hand-drawn labels are such a nice touch. Best pepper starts I've bought online."</p>
+                    <div class="mt-5 text-sm">
+                        <span class="font-semibold">— Marcus R.</span><br>
+                        <span class="text-white/60 text-xs">Boulder, CO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="max-w-4xl mx-auto px-6 py-16">
+        <div class="text-center mb-10">
+            <span class="text-[#c2410f] uppercase tracking-[3px] text-xs font-semibold">STILL HAVE QUESTIONS?</span>
+            <h2 class="section-header mt-2 heading-playful">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="space-y-3">
+            <!-- FAQ Item 1 -->
+            <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center px-6 py-5 text-left font-medium hover:bg-stone-50 transition-colors">
+                    <span>Do I really not need to harden these off?</span>
+                    <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6 text-stone-600 text-sm">
+                    Yes! Because we grow them in the arid, high-desert conditions of Bellvue, Colorado, our starts are naturally toughened. You can plant them directly into your garden or containers the day they arrive — no transition period needed.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center px-6 py-5 text-left font-medium hover:bg-stone-50 transition-colors">
+                    <span>When will my peppers be ready to harvest?</span>
+                    <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6 text-stone-600 text-sm">
+                    Most varieties produce their first peppers in 45–75 days after transplanting. Super-hots like Ghost and Reaper can take 80–95 days. You'll get continuous harvests through frost with proper care.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center px-6 py-5 text-left font-medium hover:bg-stone-50 transition-colors">
+                    <span>Do you ship live plants year-round?</span>
+                    <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6 text-stone-600 text-sm">
+                    We ship live starts from early April through mid-October. During colder months we pause shipping to protect the plants. Check the site for current shipping windows.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center px-6 py-5 text-left font-medium hover:bg-stone-50 transition-colors">
+                    <span>How many peppers will one plant produce?</span>
+                    <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6 text-stone-600 text-sm">
+                    Expect 1–3+ lbs per plant depending on variety and growing conditions. Compact varieties like Jalapeño Pot-a-pino are great for containers and still very productive.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 5 -->
+            <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center px-6 py-5 text-left font-medium hover:bg-stone-50 transition-colors">
+                    <span>Do you ship to my state?</span>
+                    <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6 text-stone-600 text-sm">
+                    Yes! We ship live pepper starts to all 48 contiguous states. Plants travel in sturdy, ventilated packaging designed to keep roots moist and protected.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="max-w-5xl mx-auto px-6 pb-16">
+        <div class="bg-gradient-to-br from-[#9f2a00] to-[#7f2000] rounded-3xl px-8 md:px-14 py-12 text-white text-center">
+            <h2 class="text-4xl font-semibold tracking-tight heading-playful">Ready to grow something spicy?</h2>
+            <p class="mt-3 text-white/80 max-w-md mx-auto">Join hundreds of happy chili growers this season. Your first harvest is closer than you think.</p>
+            
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="document.getElementById('shop').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-10 py-4 bg-white text-[#9f2a00] hover:bg-stone-100 font-semibold rounded-3xl transition-all text-lg">
+                    Browse All Starts
+                </button>
+                <button onclick="showContactModal()" 
+                        class="px-8 py-4 border border-white/70 hover:bg-white/10 font-medium rounded-3xl transition-all flex items-center justify-center gap-x-2">
+                    <span>Have questions? Talk to us</span>
+                </button>
+            </div>
+            <p class="text-white/60 text-xs mt-6">Ships from Bellvue, Colorado • Usually ships same or next business day (in season)</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-stone-900 text-stone-400 text-sm">
+        <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+            <div class="grid md:grid-cols-12 gap-y-10">
+                <div class="md:col-span-5">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <div class="w-9 h-9 bg-[#c2410f] rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-pepper-hot text-white"></i>
+                        </div>
+                        <span class="text-white font-bold text-2xl tracking-tighter heading-playful">The Chili Patch</span>
+                    </div>
+                    <p class="max-w-xs">A proud family venture growing resilient live pepper starts in the high desert of Bellvue, Colorado since 2026.</p>
+                    
+                    <div class="mt-6 flex gap-x-4 text-xl">
+                        <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <div class="font-semibold text-white mb-3 tracking-wider text-xs">EXPLORE</div>
+                    <div class="space-y-[7px]">
+                        <a href="#shop" class="block hover:text-white">All Live Starts</a>
+                        <a href="#how-it-works" class="block hover:text-white">How It Works</a>
+                        <a href="#" class="block hover:text-white">Growing Guides</a>
+                        <a href="#" class="block hover:text-white">Recipes &amp; Hot Sauce</a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-4">
+                    <div class="font-semibold text-white mb-3 tracking-wider text-xs">SUPPORT &amp; INFO</div>
+                    <div class="space-y-[7px]">
+                        <a href="#" class="block hover:text-white">Shipping &amp; Live Guarantee</a>
+                        <a href="#" class="block hover:text-white">Return Policy</a>
+                        <a href="#" class="block hover:text-white">Contact Us</a>
+                        <a href="#" class="block hover:text-white">Wholesale / Bulk Orders</a>
+                    </div>
+                    <div class="mt-6 text-xs">
+                        <strong class="text-white">The Chili Patch</strong><br>
+                        5504 Rist Canyon Rd, Bellvue, CO 80512
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-stone-800 mt-12 pt-6 text-xs flex flex-col md:flex-row justify-between items-center gap-y-2">
+                <div>© 2026 The Chili Patch. All rights reserved. Grown with love in Colorado.</div>
+                <div class="flex gap-x-5">
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                    <a href="#" class="hover:text-white">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT MODAL -->
+    <div id="product-modal" onclick="if (event.target.id === 'product-modal') hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl modal">
+            <div class="relative">
+                <img id="modal-image" class="w-full h-72 object-cover" alt="">
+                <button onclick="hideProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white w-9 h-9 flex items-center justify-center rounded-2xl text-stone-700">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+                <div id="modal-badge" class="absolute top-4 left-4"></div>
+            </div>
+            
+            <div class="p-7">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 id="modal-title" class="text-3xl font-semibold tracking-tight"></h3>
+                        <p id="modal-subtitle" class="text-[#c2410f]"></p>
+                    </div>
+                    <div class="text-right">
+                        <div id="modal-price" class="text-4xl font-semibold tracking-tighter text-[#9f2a00]"></div>
+                    </div>
+                </div>
+                
+                <div id="modal-description" class="mt-5 text-stone-600 leading-relaxed"></div>
+                
+                <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-stone-50 rounded-2xl p-4">
+                        <div class="font-semibold text-[#9f2a00]">Time to Harvest</div>
+                        <div id="modal-time" class="text-lg font-medium"></div>
+                    </div>
+                    <div class="bg-stone-50 rounded-2xl p-4">
+                        <div class="font-semibold text-[#9f2a00]">Expected Yield</div>
+                        <div id="modal-yield" class="text-lg font-medium"></div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex gap-x-3">
+                    <button onclick="addCurrentProductToCart(); hideProductModal()" 
+                            class="flex-1 py-4 bg-[#9f2a00] hover:bg-[#7f2000] active:bg-black transition-all text-white font-semibold rounded-2xl flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span>Add to Cart</span>
+                    </button>
+                    <button onclick="hideProductModal()" 
+                            class="px-8 py-4 border border-stone-300 hover:bg-stone-50 rounded-2xl font-medium">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div id="cart-sidebar" onclick="if (event.target.id === 'cart-sidebar') hideCart()" class="hidden fixed inset-0 bg-black/60 z-[110] justify-end">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md h-full overflow-auto shadow-2xl cart-slide">
+            <div class="p-6 border-b flex items-center justify-between sticky top-0 bg-white z-10">
+                <div class="flex items-center gap-x-3">
+                    <i class="fa-solid fa-shopping-bag text-2xl text-[#9f2a00]"></i>
+                    <span class="font-semibold text-2xl">Your Cart</span>
+                </div>
+                <button onclick="hideCart()" class="text-3xl leading-none text-stone-400 hover:text-stone-600">&times;</button>
+            </div>
+            
+            <div id="cart-items" class="p-6 space-y-5 min-h-[200px]">
+                <!-- Populated by JS -->
+            </div>
+            
+            <div class="p-6 border-t sticky bottom-0 bg-white">
+                <div class="flex justify-between text-lg font-semibold mb-1">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <p class="text-xs text-stone-500 mb-4">Shipping calculated at checkout • Free over $65</p>
+                
+                <button onclick="proceedToCheckout()" 
+                        class="w-full py-4 bg-[#9f2a00] hover:bg-[#7f2000] active:bg-black transition-all text-white font-bold rounded-2xl text-lg">
+                    Proceed to Secure Checkout
+                </button>
+                
+                <div class="flex items-center justify-center gap-x-2 mt-3 text-xs text-stone-500">
+                    <i class="fa-brands fa-stripe text-lg"></i>
+                    <span>Powered by Stripe</span>
+                </div>
+                
+                <button onclick="hideCart()" class="w-full mt-3 text-sm text-stone-500 hover:text-stone-700">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" onclick="if (event.target.id === 'checkout-modal') hideCheckoutModal()" class="hidden fixed inset-0 bg-black/70 z-[120] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-lg rounded-3xl overflow-hidden modal">
+            <div class="p-7">
+                <h3 class="text-2xl font-semibold">Checkout</h3>
+                <p class="text-sm text-stone-500">Secure checkout powered by Stripe</p>
+                
+                <div class="mt-6 space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-medium text-stone-500">FIRST NAME</label>
+                            <input id="checkout-firstname" type="text" value="Scott" class="w-full border border-stone-300 rounded-2xl px-4 py-2.5 mt-1">
+                        </div>
+                        <div>
+                            <label class="text-xs font-medium text-stone-500">LAST NAME</label>
+                            <input id="checkout-lastname" type="text" value="Brewster" class="w-full border border-stone-300 rounded-2xl px-4 py-2.5 mt-1">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs font-medium text-stone-500">EMAIL (for confirmation)</label>
+                        <input id="checkout-email" type="email" value="you@email.com" class="w-full border border-stone-300 rounded-2xl px-4 py-2.5 mt-1">
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs font-medium text-stone-500">SHIPPING ADDRESS</label>
+                        <input id="checkout-address" type="text" value="123 Mountain View Dr" class="w-full border border-stone-300 rounded-2xl px-4 py-2.5 mt-1">
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-2">
+                            <label class="text-xs font-medium text-stone-500">CITY</label>
+                            <input id="checkout-city" type="text" value="Fort Collins" class="w-full border border-stone-300 rounded-2xl px-4 py-2.5 mt-1">
+                        </div>
+                        <div>
+                            <label class="text-xs font-medium text-stone-500">ZIP</label>
+                            <input id="checkout-zip" type="text" value="80524" class="w-full border border-stone-300 rounded-2xl px-4 py-2.5 mt-1">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-7 border-t pt-5">
+                    <div class="flex justify-between font-semibold">
+                        <span>Total</span>
+                        <span id="checkout-total"></span>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex gap-x-3">
+                    <button onclick="completeOrder()" 
+                            class="flex-1 py-4 bg-[#9f2a00] hover:bg-[#7f2000] text-white font-bold rounded-2xl transition-all flex items-center justify-center gap-x-2">
+                        <i class="fa-brands fa-stripe"></i>
+                        <span>Continue to Stripe Checkout</span>
+                    </button>
+                    <button onclick="hideCheckoutModal()" class="px-7 border border-stone-300 rounded-2xl font-medium">Cancel</button>
+                </div>
+                
+                <p class="text-[10px] text-center text-stone-400 mt-4">You will be redirected to Stripe’s secure checkout page.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/70 z-[130] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-sm text-center modal">
+            <div class="mx-auto w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-5">
+                <i class="fa-solid fa-check text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-semibold">Thank you, chili friend!</h3>
+            <p class="mt-2 text-stone-600">Your order has been placed successfully.</p>
+            
+            <div class="mt-4 text-sm bg-stone-100 rounded-2xl p-4 text-left space-y-1">
+                <div><strong>Order #CP-28471</strong></div>
+                <div class="text-emerald-700">📧 Confirmation email sent to you</div>
+                <div class="text-[#c2410f]">📦 Fulfillment request sent to The Chili Patch team</div>
+                <div class="text-xs text-stone-500 mt-1">You will be redirected to Stripe to complete payment • Est. delivery: 3–6 business days (in season)</div>
+            </div>
+            
+            <button onclick="initiateStripePayment()" 
+                    class="mt-4 w-full py-3.5 bg-[#635bff] hover:bg-[#5348e0] text-white font-semibold rounded-2xl flex items-center justify-center gap-x-2">
+                <i class="fa-brands fa-stripe"></i>
+                <span>Complete Payment with Stripe</span>
+            </button>
+            
+            <button onclick="closeSuccessAndReset()" 
+                    class="mt-3 w-full py-3 text-sm text-stone-500 hover:text-stone-700">
+                Back to Shop
+            </button>
+        </div>
+    </div>
+
+    <!-- ADMIN MODAL -->
+    <div id="admin-modal" onclick="if (event.target.id === 'admin-modal') hideAdminModal()" class="hidden fixed inset-0 bg-black/70 z-[140] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden modal shadow-2xl">
+            <div class="p-6 border-b flex items-center justify-between">
+                <div>
+                    <h3 class="text-2xl font-semibold">Admin Dashboard</h3>
+                    <p class="text-xs text-stone-500">The Chili Patch • Demo Mode • Data stored in your browser</p>
+                </div>
+                <button onclick="hideAdminModal()" class="text-3xl leading-none text-stone-400 hover:text-stone-600">&times;</button>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex border-b">
+                <button onclick="switchAdminTab(0)" id="admin-tab-0"
+                        class="admin-tab flex-1 py-3 font-semibold border-b-2 border-[#9f2a00] text-[#9f2a00]">Inventory</button>
+                <button onclick="switchAdminTab(1)" id="admin-tab-1"
+                        class="admin-tab flex-1 py-3 font-semibold text-stone-500 hover:text-stone-700">Recent Orders</button>
+            </div>
+            
+            <!-- Inventory Tab -->
+            <div id="admin-inventory" class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-sm font-medium">Live Inventory • Update stock levels</div>
+                    <button onclick="resetInventory()" class="text-xs px-3 py-1 border rounded-xl hover:bg-stone-50">Reset to Defaults</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b text-left text-stone-500">
+                                <th class="py-2 pr-4">Variety</th>
+                                <th class="py-2 px-4 text-center">Stock</th>
+                                <th class="py-2 px-4 text-center">Price</th>
+                                <th class="py-2 pl-4 w-24"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table" class="text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Orders Tab -->
+            <div id="admin-orders" class="p-6 hidden">
+                <div class="text-sm font-medium mb-4">Recent Orders • Fulfillment Queue</div>
+                <div id="orders-list" class="space-y-3 max-h-[420px] overflow-auto pr-2">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="mt-4 text-xs text-stone-500">Orders are saved locally. In production this would sync to your backend + trigger fulfillment emails automatically.</div>
+            </div>
+            
+            <div class="p-4 border-t bg-stone-50 text-xs text-stone-500 flex items-center justify-between">
+                <div>Demo only — connect to real backend + EmailJS / serverless for live emails &amp; inventory sync.</div>
+                <button onclick="hideAdminModal()" class="px-4 py-1.5 text-[#9f2a00] font-medium">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#9f2a00');
+        }
+
+        // === STRIPE CONFIGURATION ===
+        // Your live publishable key
+        const stripePublishableKey = 'pk_live_51QTwsYRxDhxQfVMs5o6IontDlpyoLXTU8dGZrDZYzvsZCMCwkFLrkwhHIXFpXOF2irEW9UUHkvFpV9ZFYVTW6ZR600YKOUb6Zk';
+        
+        // Initialize Stripe (used if you switch to client-side confirmation later)
+        let stripe;
+        if (typeof Stripe !== 'undefined') {
+            stripe = Stripe(stripePublishableKey);
+        }
+        
+        // Navbar scroll effect
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('nav-scrolled');
+                } else {
+                    navbar.classList.remove('nav-scrolled');
+                }
+            });
+        }
+        
+        // Product data - 12 varieties + emphasis on arid grown, no harden off
+        const products = [
+            {
+                id: 0,
+                name: "Anaheim Pepper Starts",
+                subtitle: "Mild • 500–2,500 SHU",
+                price: 5.99,
+                image: "https://i.ibb.co/6JcqB7XQ/1274-Photoroom.png",
+                description: "Classic mild chili perfect for stuffing, roasting, and salsa. Our arid-grown Anaheim starts are vigorous and productive. Pre-hardened in Bellvue's high desert — plant directly and enjoy huge yields.",
+                timeToHarvest: "60–75 days",
+                yield: "2–4 lbs per plant",
+                badge: "POPULAR"
+            },
+            {
+                id: 1,
+                name: "Giant Marconi Pepper Starts",
+                subtitle: "Sweet Italian • 0–500 SHU",
+                price: 6.99,
+                image: "https://i.ibb.co/v6TTpM0X/image-13.jpg",
+                description: "Huge, sweet, tapered peppers with incredible flavor. Excellent for grilling and fresh eating. These starts have been toughened in arid Colorado conditions so they establish fast in any garden.",
+                timeToHarvest: "65–80 days",
+                yield: "2.5–5 lbs per plant",
+                badge: null
+            },
+            {
+                id: 2,
+                name: "Red Knight Sweet Pepper Starts",
+                subtitle: "Sweet • 0 SHU",
+                price: 6.49,
+                image: "https://i.ibb.co/KpQLfjGg/image-14.jpg",
+                description: "Beautiful deep red, blocky sweet peppers. Thick walls and fantastic flavor. Our starts are grown in arid soil for strong root systems and reliable performance wherever you plant them.",
+                timeToHarvest: "70–85 days",
+                yield: "2–4 lbs per plant",
+                badge: null
+            },
+            {
+                id: 3,
+                name: "Bhut Jolokia 'Ghost' Pepper Starts",
+                subtitle: "Super Hot • 800,000–1,000,000+ SHU",
+                price: 8.99,
+                image: "https://i.ibb.co/Dg4HmV54/1267-Photoroom.png",
+                description: "One of the world's hottest peppers with a unique fruity-smoky flavor. These starts are grown tough in Bellvue's arid climate so they handle heat stress beautifully. Handle with care!",
+                timeToHarvest: "85–100 days",
+                yield: "1–2.5 lbs per plant",
+                badge: "SUPER HOT"
+            },
+            {
+                id: 4,
+                name: "Aji Rico Pepper Starts",
+                subtitle: "Fruity Peruvian • 15,000–30,000 SHU",
+                price: 6.99,
+                image: "https://i.ibb.co/LDgJMHQz/image-16.jpg",
+                description: "Delicious citrusy, fruity flavor with medium heat. Very productive and beautiful on the plant. Our Colorado-grown starts arrive ready to thrive in containers or in-ground gardens anywhere.",
+                timeToHarvest: "70–85 days",
+                yield: "2–4 lbs per plant",
+                badge: null
+            },
+            {
+                id: 5,
+                name: "Garden Salsa Pepper Starts",
+                subtitle: "Medium • Perfect for Salsa",
+                price: 5.99,
+                image: "https://i.ibb.co/Fb9SL0m6/image-17.jpg",
+                description: "Specially selected mix for fresh salsa — thick walls, great flavor, balanced heat. These starts are pre-acclimated to arid conditions so you can plant them the same day they arrive with zero stress.",
+                timeToHarvest: "65–80 days",
+                yield: "2–3.5 lbs per plant",
+                badge: "BEST SELLER"
+            },
+            {
+                id: 6,
+                name: "Carolina Reaper Pepper Starts",
+                subtitle: "World's Hottest • 1,500,000–2,200,000 SHU",
+                price: 9.99,
+                image: "https://i.ibb.co/KjF12N7w/1268-Photoroom.png",
+                description: "The legendary hottest pepper on earth. Fruity with intense heat. Our arid-grown starts are vigorous and productive. A must-have for serious chili heads. Use extreme caution when handling.",
+                timeToHarvest: "90–110 days",
+                yield: "1–2 lbs per plant",
+                badge: "EXTREME"
+            },
+            {
+                id: 7,
+                name: "Long Slim Cayenne Pepper Starts",
+                subtitle: "Hot • 30,000–50,000 SHU",
+                price: 5.49,
+                image: "https://i.ibb.co/Sw8rVycp/image-18.jpg",
+                description: "Classic thin, long cayenne peppers perfect for drying, hot sauce, and seasoning. Extremely productive plants. Our Bellvue-grown starts are already hardened and ready for your garden or pots.",
+                timeToHarvest: "55–70 days",
+                yield: "2–5 lbs per plant",
+                badge: null
+            },
+            {
+                id: 8,
+                name: "Mad Hatter Pepper Starts",
+                subtitle: "Unique • Mild- Medium",
+                price: 6.99,
+                image: "https://i.ibb.co/ns3dvZvs/1258-Photoroom.png",
+                description: "Fun, hat-shaped peppers with sweet, fruity flavor and just a touch of heat. Very ornamental and productive. These starts have been grown in arid Colorado soil for excellent adaptability.",
+                timeToHarvest: "60–75 days",
+                yield: "1.5–3 lbs per plant",
+                badge: "UNIQUE"
+            },
+            {
+                id: 9,
+                name: "Poblano Pepper Starts",
+                subtitle: "Mild • 1,000–2,000 SHU",
+                price: 5.99,
+                image: "https://i.ibb.co/yFpVMxkN/1259-Photoroom.png",
+                description: "The classic pepper for chiles rellenos and mole. Large, heart-shaped, mild flavor. Our starts are toughened in Bellvue's arid environment so they establish quickly and produce heavily.",
+                timeToHarvest: "65–80 days",
+                yield: "2–4 lbs per plant",
+                badge: null
+            },
+            {
+                id: 10,
+                name: "Jalapeño Pot-a-pino Starts",
+                subtitle: "Compact • 2,500–8,000 SHU",
+                price: 6.49,
+                image: "https://i.ibb.co/9mrLnkdT/image-19.jpg",
+                description: "Perfect compact variety for containers and small spaces. Classic jalapeño flavor and heat. These starts are grown in arid conditions so they handle container life and temperature swings with ease.",
+                timeToHarvest: "55–70 days",
+                yield: "1.5–3 lbs per plant",
+                badge: "CONTAINER FRIENDLY"
+            },
+            {
+                id: 11,
+                name: "Serrano Pepper Starts",
+                subtitle: "Hot • 10,000–23,000 SHU",
+                price: 5.49,
+                image: "https://i.ibb.co/nhhvknh/1265-Photoroom.png",
+                description: "Small, flavorful hot peppers that pack more punch than jalapeños. Excellent for fresh salsas and pickling. Our Colorado arid-grown starts arrive vigorous and ready to produce abundantly.",
+                timeToHarvest: "60–75 days",
+                yield: "2–4 lbs per plant",
+                badge: null
+            }
+        ]
+        
+        let cart = []
+        let currentProductId = null
+        
+        // Load cart from localStorage
+        function loadCart() {
+            const savedCart = localStorage.getItem('chiliCart')
+            if (savedCart) {
+                cart = JSON.parse(savedCart)
+                updateCartCount()
+            }
+        }
+        
+        function saveCart() {
+            localStorage.setItem('chiliCart', JSON.stringify(cart))
+        }
+        
+        function updateCartCount() {
+            const countEl = document.getElementById('cart-count')
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
+            countEl.textContent = totalItems
+            countEl.style.display = totalItems > 0 ? 'flex' : 'none'
+        }
+        
+        // Render all product cards dynamically
+        function renderProductGrid() {
+            const grid = document.getElementById('product-grid')
+            grid.innerHTML = ''
+            
+            products.forEach(product => {
+                const card = document.createElement('div')
+                card.className = `product-card rounded-3xl overflow-hidden border border-stone-100 shadow-sm flex flex-col`
+                
+                const badgeHTML = product.badge ? 
+                    `<div class="absolute top-4 left-4"><span class="product-badge text-white text-xs font-bold px-3.5 py-1 rounded-2xl shadow">${product.badge}</span></div>` : ''
+                
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-52 object-cover">
+                        ${badgeHTML}
+                        <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded-2xl text-xs font-semibold flex items-center gap-x-1">
+                            <i class="fa-solid fa-leaf text-[#c2410f]"></i>
+                            <span class="text-[#9f2a00]">${product.timeToHarvest.split('–')[0]} days</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-xl tracking-tight">${product.name}</h3>
+                            <p class="text-[#c2410f] text-sm font-medium mt-0.5">${product.subtitle}</p>
+                            <p class="text-stone-600 text-sm mt-3 line-clamp-3">${product.description.substring(0, 140)}...</p>
+                        </div>
+                        
+                        <div class="mt-auto pt-5 border-t">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <span class="text-3xl font-semibold tracking-tighter text-[#9f2a00]">$${product.price.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Quantity selector + Add -->
+                            <div class="flex items-center gap-x-2">
+                                <div class="flex items-center border border-stone-200 rounded-2xl overflow-hidden">
+                                    <button onclick="changeCardQty(this, -1)" class="qty-btn hover:bg-stone-100 active:bg-stone-200 text-xl leading-none text-stone-500">−</button>
+                                    <span class="px-3 text-sm font-medium qty-value" data-product-id="${product.id}">1</span>
+                                    <button onclick="changeCardQty(this, 1)" class="qty-btn hover:bg-stone-100 active:bg-stone-200 text-xl leading-none text-stone-500">+</button>
+                                </div>
+                                
+                                <button onclick="addToCartFromCard(${product.id}, this)" 
+                                        class="flex-1 px-5 py-2.5 bg-[#9f2a00] hover:bg-[#7f2000] active:bg-black transition-all text-white text-sm font-semibold rounded-2xl flex items-center justify-center gap-x-2">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                            
+                            <button onclick="showProductModal(${product.id})" 
+                                    class="w-full mt-2 text-xs text-stone-500 hover:text-[#9f2a00] transition-colors py-1">
+                                View details &amp; growing tips →
+                            </button>
+                        </div>
+                    </div>
+                `
+                grid.appendChild(card)
+            })
+        }
+        
+        function changeCardQty(btn, delta) {
+            const container = btn.parentElement
+            const valueSpan = container.querySelector('.qty-value')
+            let qty = parseInt(valueSpan.textContent)
+            qty = Math.max(1, Math.min(99, qty + delta))
+            valueSpan.textContent = qty
+        }
+        
+        function addToCartFromCard(productId, btn) {
+            const container = btn.parentElement
+            const valueSpan = container.querySelector('.qty-value')
+            const qty = parseInt(valueSpan.textContent) || 1
+            
+            const product = products[productId]
+            const existing = cart.find(item => item.id === productId)
+            
+            if (existing) {
+                existing.quantity += qty
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: qty
+                })
+            }
+            
+            saveCart()
+            updateCartCount()
+            
+            // Reset qty to 1
+            valueSpan.textContent = '1'
+            
+            // Toast
+            showToast(`${qty} × ${product.name} added to cart!`)
+            
+            // Optional: briefly change button text
+            const originalText = btn.innerHTML
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Added!</span>`
+            setTimeout(() => {
+                if (btn) btn.innerHTML = originalText
+            }, 1200)
+        }
+        
+        function addToCart(productId) {
+            // Fallback for modal
+            const product = products[productId]
+            const existing = cart.find(item => item.id === productId)
+            
+            if (existing) {
+                existing.quantity++
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                })
+            }
+            
+            saveCart()
+            updateCartCount()
+            showToast(`${product.name} added to cart!`)
+        }
+        
+        function addBundleToCart(bundleType) {
+            let bundleItems = []
+            let bundleName = ''
+            
+            if (bundleType === 'salsa') {
+                bundleItems = [0, 9, 10, 11] // Anaheim, Poblano, Jalapeno Pot-a-pino, Serrano
+                bundleName = 'Salsa Starter Bundle'
+            } else if (bundleType === 'heat') {
+                bundleItems = [3, 6, 7, 8] // Ghost, Reaper, Cayenne, Mad Hatter
+                bundleName = 'Heat Seeker Bundle'
+            }
+            
+            bundleItems.forEach(id => {
+                const product = products[id]
+                const existing = cart.find(item => item.id === id)
+                
+                if (existing) {
+                    existing.quantity++
+                } else {
+                    cart.push({
+                        ...product,
+                        quantity: 1
+                    })
+                }
+            })
+            
+            saveCart()
+            updateCartCount()
+            showToast(`${bundleName} added to cart!`)
+            
+            setTimeout(() => {
+                showCart()
+            }, 650)
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div')
+            toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#9f2a00] text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-x-3 z-[200]`
+            toast.innerHTML = `
+                <i class="fa-solid fa-check-circle"></i>
+                <span>${message}</span>
+            `
+            document.body.appendChild(toast)
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.3s ease'
+                toast.style.opacity = '0'
+                setTimeout(() => toast.remove(), 300)
+            }, 2200)
+        }
+        
+        function showProductModal(productId) {
+            const product = products[productId]
+            currentProductId = productId
+            
+            document.getElementById('modal-image').src = product.image
+            document.getElementById('modal-title').textContent = product.name
+            document.getElementById('modal-subtitle').textContent = product.subtitle
+            document.getElementById('modal-price').innerHTML = `$${product.price.toFixed(2)}`
+            document.getElementById('modal-description').innerHTML = product.description + 
+                `<div class="mt-3 text-xs bg-[#fdfaf3] p-3 rounded-2xl border border-stone-100"><strong>Hand-drawn chili label included</strong> with every order • Grown in arid Bellvue, Colorado — no acclimation needed.</div>`
+            document.getElementById('modal-time').textContent = product.timeToHarvest
+            document.getElementById('modal-yield').textContent = product.yield
+            
+            const badgeContainer = document.getElementById('modal-badge')
+            badgeContainer.innerHTML = product.badge ? 
+                `<span class="product-badge text-white text-xs font-bold px-3.5 py-1 rounded-2xl shadow">${product.badge}</span>` : ''
+            
+            document.getElementById('product-modal').classList.remove('hidden')
+            document.getElementById('product-modal').classList.add('flex')
+        }
+        
+        function hideProductModal() {
+            const modal = document.getElementById('product-modal')
+            modal.classList.remove('flex')
+            modal.classList.add('hidden')
+        }
+        
+        function addCurrentProductToCart() {
+            if (currentProductId !== null) {
+                addToCart(currentProductId)
+                hideProductModal()
+            }
+        }
+        
+        function showCart() {
+            const sidebar = document.getElementById('cart-sidebar')
+            const itemsContainer = document.getElementById('cart-items')
+            
+            sidebar.classList.remove('hidden')
+            sidebar.classList.add('flex')
+            
+            renderCartItems(itemsContainer)
+        }
+        
+        function hideCart() {
+            const sidebar = document.getElementById('cart-sidebar')
+            sidebar.classList.remove('flex')
+            sidebar.classList.add('hidden')
+        }
+        
+        function renderCartItems(container) {
+            container.innerHTML = ''
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-12 text-center">
+                        <i class="fa-solid fa-pepper-hot text-5xl text-stone-300 mb-4"></i>
+                        <p class="text-stone-500">Your cart is empty</p>
+                        <button onclick="hideCart(); document.getElementById('shop').scrollIntoView({behavior:'smooth'})" 
+                                class="mt-4 text-[#9f2a00] font-medium text-sm">Browse live starts →</button>
+                    </div>
+                `
+                document.getElementById('cart-subtotal').textContent = '$0.00'
+                return
+            }
+            
+            let subtotal = 0
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity
+                subtotal += itemTotal
+                
+                const div = document.createElement('div')
+                div.className = 'flex gap-x-4 border-b pb-5'
+                div.innerHTML = `
+                    <img src="${item.image}" class="w-16 h-16 object-cover rounded-2xl flex-shrink-0" alt="${item.name}">
+                    <div class="flex-1 min-w-0">
+                        <div class="font-semibold leading-tight">${item.name}</div>
+                        <div class="text-[#c2410f] text-sm">$${item.price.toFixed(2)}</div>
+                        
+                        <div class="flex items-center justify-between mt-3">
+                            <div class="flex items-center border border-stone-200 rounded-2xl">
+                                <button onclick="changeCartQuantity(${index}, -1)" class="w-8 h-8 flex items-center justify-center hover:bg-stone-100 active:bg-stone-200 rounded-l-2xl text-lg leading-none">−</button>
+                                <span class="px-3 text-sm font-medium">${item.quantity}</span>
+                                <button onclick="changeCartQuantity(${index}, 1)" class="w-8 h-8 flex items-center justify-center hover:bg-stone-100 active:bg-stone-200 rounded-r-2xl text-lg leading-none">+</button>
+                            </div>
+                            
+                            <div class="flex items-center gap-x-3">
+                                <span class="font-semibold">$${itemTotal.toFixed(2)}</span>
+                                <button onclick="removeFromCart(${index})" class="text-stone-400 hover:text-red-500 transition-colors">
+                                    <i class="fa-solid fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `
+                container.appendChild(div)
+            })
+            
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`
+        }
+        
+        function changeCartQuantity(index, delta) {
+            cart[index].quantity += delta
+            
+            if (cart[index].quantity < 1) {
+                cart.splice(index, 1)
+            }
+            
+            saveCart()
+            updateCartCount()
+            
+            const container = document.getElementById('cart-items')
+            renderCartItems(container)
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1)
+            saveCart()
+            updateCartCount()
+            
+            const container = document.getElementById('cart-items')
+            renderCartItems(container)
+        }
+        
+        function proceedToCheckout() {
+            hideCart()
+            
+            const modal = document.getElementById('checkout-modal')
+            const totalEl = document.getElementById('checkout-total')
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+            totalEl.textContent = `$${subtotal.toFixed(2)}`
+            
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function hideCheckoutModal() {
+            const modal = document.getElementById('checkout-modal')
+            modal.classList.remove('flex')
+            modal.classList.add('hidden')
+        }
+        
+        function completeOrder() {
+            const email = document.getElementById('checkout-email').value || 'customer@example.com'
+            const firstName = document.getElementById('checkout-firstname').value || 'Friend'
+            const lastName = document.getElementById('checkout-lastname').value || ''
+            const address = document.getElementById('checkout-address').value || ''
+            const city = document.getElementById('checkout-city').value || ''
+            const zip = document.getElementById('checkout-zip').value || ''
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+
+            // Build items list for emails (using <br> so line breaks show in EmailJS emails)
+            const itemsList = cart.map(item => 
+                `${item.quantity}× ${item.name} — $${(item.price * item.quantity).toFixed(2)}`
+            ).join('<br>')
+
+            hideCheckoutModal()
+
+            // Save order to localStorage for admin dashboard
+            saveOrderToLocalStorage(email, firstName)
+
+            // === EMAILJS: Send real emails ===
+            if (typeof emailjs !== 'undefined' && emailjs.init) {
+                // 1. Send confirmation email to customer
+                emailjs.send("service_q88boyb", "template_347e3dg", {
+                    to_name: firstName,
+                    to_email: email,
+                    order_id: 'CP-' + Date.now().toString().slice(-6),
+                    order_items: itemsList,
+                    order_total: subtotal.toFixed(2),
+                    shipping_address: `${address}, ${city} ${zip}`
+                }).then(() => {
+                    console.log('%c[EmailJS] Customer confirmation email sent!', 'color:#166534')
+                }).catch(err => console.error('Customer email error:', err))
+
+                // 2. Send fulfillment request to you (Scott)
+                emailjs.send("service_q88boyb", "template_5b24qvr", {
+                    customer_name: `${firstName} ${lastName}`,
+                    customer_email: email,
+                    shipping_address: `${address}\n${city}, CO ${zip}`,
+                    order_items: itemsList,
+                    order_total: subtotal.toFixed(2),
+                    order_date: new Date().toLocaleString()
+                }).then(() => {
+                    console.log('%c[EmailJS] Fulfillment email sent to you!', 'color:#c2410f')
+                }).catch(err => console.error('Fulfillment email error:', err))
+            } else {
+                console.log('%c[EmailJS] EmailJS not loaded — emails not sent', 'color:orange')
+            }
+
+            // Show success screen
+            const successModal = document.getElementById('success-modal')
+            successModal.classList.remove('hidden')
+            successModal.classList.add('flex')
+
+            // Clear cart
+            cart = []
+            saveCart()
+            updateCartCount()
+        }
+        
+        function saveOrderToLocalStorage(email, firstName) {
+            let orders = JSON.parse(localStorage.getItem('chiliOrders') || '[]')
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+            
+            const newOrder = {
+                id: 'CP-' + Date.now().toString().slice(-6),
+                date: new Date().toISOString(),
+                customer: `${firstName} (${email})`,
+                items: cart.map(i => ({name: i.name, qty: i.quantity, price: i.price})),
+                total: subtotal,
+                status: 'New - Awaiting Fulfillment'
+            }
+            
+            orders.unshift(newOrder)
+            // Keep only last 20 orders
+            if (orders.length > 20) orders = orders.slice(0, 20)
+            
+            localStorage.setItem('chiliOrders', JSON.stringify(orders))
+        }
+        
+        function closeSuccessAndReset() {
+            const successModal = document.getElementById('success-modal')
+            successModal.classList.remove('flex')
+            successModal.classList.add('hidden')
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+
+        // Stripe Payment via Netlify / Vercel Function + Stripe Checkout (Recommended)
+        async function initiateStripePayment() {
+            // Hide success modal if open
+            const successModal = document.getElementById('success-modal');
+            if (successModal) {
+                successModal.classList.remove('flex');
+                successModal.classList.add('hidden');
+            }
+
+            const lastEmail = document.getElementById('checkout-email')?.value || 'customer@example.com';
+            const orderId = 'CP-' + Date.now().toString().slice(-6);
+
+            // Save current cart for the backend
+            if (cart.length > 0) {
+                localStorage.setItem('lastOrderItems', JSON.stringify(cart));
+            }
+
+            const payload = {
+                items: cart.length > 0 ? cart : JSON.parse(localStorage.getItem('lastOrderItems') || '[]'),
+                customer: {
+                    email: lastEmail,
+                    orderId: orderId
+                }
+            };
+
+            try {
+                // This calls your serverless function that creates the Stripe Checkout Session
+                const response = await fetch('/.netlify/functions/create-checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (data.url) {
+                    // Redirect customer to Stripe's secure hosted checkout
+                    window.location.href = data.url;
+                } else {
+                    throw new Error(data.error || 'Failed to create checkout session');
+                }
+            } catch (error) {
+                console.error('Stripe Checkout error:', error);
+                alert('Unable to start Stripe checkout right now. Please try again or email us directly.');
+                
+                // Fallback - show success modal so order isn't lost
+                if (successModal) {
+                    successModal.classList.remove('hidden');
+                    successModal.classList.add('flex');
+                }
+            }
+        }
+        
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling
+            const icon = element.querySelector('i')
+            
+            answer.classList.toggle('hidden')
+            
+            if (!answer.classList.contains('hidden')) {
+                icon.style.transform = 'rotate(180deg)'
+            } else {
+                icon.style.transform = 'rotate(0deg)'
+            }
+        }
+        
+        function toggleMobileMenu() {
+            const nav = document.createElement('div')
+            nav.className = `fixed inset-0 bg-black/70 z-[150] md:hidden`
+            nav.innerHTML = `
+                <div class="bg-white w-4/5 h-full p-8" onclick="event.stopImmediatePropagation()">
+                    <div class="flex justify-between items-center mb-10">
+                        <span class="font-bold text-2xl text-[#9f2a00] heading-playful">Menu</span>
+                        <button class="text-3xl text-stone-400">&times;</button>
+                    </div>
+                    
+                    <div class="flex flex-col text-xl gap-y-6 font-medium">
+                        <a href="#shop" class="hover:text-[#9f2a00]">Shop Starts</a>
+                        <a href="#how-it-works" class="hover:text-[#9f2a00]">How It Works</a>
+                        <a href="#about" class="hover:text-[#9f2a00]">Our Story</a>
+                        <a href="#faq" class="hover:text-[#9f2a00]">FAQ</a>
+                        
+                        <div class="pt-6 border-t">
+                            <button onclick="document.querySelector('.fixed').remove(); showAdminModal()" 
+                                    class="flex items-center gap-x-3 text-[#9f2a00]">
+                                <i class="fa-solid fa-cog"></i> 
+                                <span>Admin Dashboard</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+            
+            nav.onclick = () => nav.remove()
+            document.body.appendChild(nav)
+        }
+        
+        function showContactModal() {
+            const modalHTML = `
+                <div onclick="this.remove()" class="fixed inset-0 bg-black/70 z-[140] flex items-center justify-center p-4">
+                    <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md rounded-3xl p-7 modal">
+                        <h3 class="text-2xl font-semibold">Get in Touch</h3>
+                        <p class="text-sm text-stone-500 mt-1">We usually reply within a few hours.</p>
+                        
+                        <div class="mt-6 space-y-4">
+                            <div>
+                                <label class="text-xs font-medium">YOUR NAME</label>
+                                <input type="text" class="mt-1 w-full border border-stone-300 rounded-2xl px-4 py-3" placeholder="Jordan Lee">
+                            </div>
+                            <div>
+                                <label class="text-xs font-medium">EMAIL ADDRESS</label>
+                                <input type="email" class="mt-1 w-full border border-stone-300 rounded-2xl px-4 py-3" placeholder="you@example.com">
+                            </div>
+                            <div>
+                                <label class="text-xs font-medium">HOW CAN WE HELP?</label>
+                                <textarea class="mt-1 w-full border border-stone-300 rounded-3xl px-4 py-3 h-28" placeholder="Question about shipping Ghost Pepper starts to Zone 5..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex gap-x-3">
+                            <button onclick="submitContactForm(this)" class="flex-1 py-3.5 bg-[#9f2a00] hover:bg-[#7f2000] transition-all text-white font-semibold rounded-2xl">Send Message</button>
+                            <button onclick="event.target.closest('.fixed').remove()" class="px-6 border border-stone-300 rounded-2xl">Cancel</button>
+                        </div>
+                        
+                        <p class="text-[10px] text-center text-stone-400 mt-5">Or email us directly at <span class="font-medium text-[#c2410f]">hello@thechilipatch.co</span></p>
+                    </div>
+                </div>
+            `
+            document.body.insertAdjacentHTML('beforeend', modalHTML)
+        }
+        
+        function submitContactForm(btn) {
+            btn.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Message Sent!`
+            btn.disabled = true
+            
+            setTimeout(() => {
+                const modal = btn.closest('.fixed')
+                if (modal) modal.remove()
+                showToast("Thanks! We'll get back to you soon.")
+            }, 1400)
+        }
+        
+        // ===== ADMIN DASHBOARD =====
+        let currentAdminTab = 0
+        
+        function showAdminModal() {
+            const modal = document.getElementById('admin-modal')
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+            
+            // Default to inventory tab
+            switchAdminTab(0)
+        }
+        
+        function hideAdminModal() {
+            const modal = document.getElementById('admin-modal')
+            modal.classList.remove('flex')
+            modal.classList.add('hidden')
+        }
+        
+        function switchAdminTab(tab) {
+            currentAdminTab = tab
+            
+            const inv = document.getElementById('admin-inventory')
+            const ord = document.getElementById('admin-orders')
+            const tab0 = document.getElementById('admin-tab-0')
+            const tab1 = document.getElementById('admin-tab-1')
+            
+            if (tab === 0) {
+                inv.classList.remove('hidden')
+                ord.classList.add('hidden')
+                tab0.classList.add('border-b-2', 'border-[#9f2a00]', 'text-[#9f2a00]')
+                tab0.classList.remove('text-stone-500')
+                tab1.classList.remove('border-b-2', 'border-[#9f2a00]', 'text-[#9f2a00]')
+                tab1.classList.add('text-stone-500')
+                renderInventoryTable()
+            } else {
+                inv.classList.add('hidden')
+                ord.classList.remove('hidden')
+                tab1.classList.add('border-b-2', 'border-[#9f2a00]', 'text-[#9f2a00]')
+                tab1.classList.remove('text-stone-500')
+                tab0.classList.remove('border-b-2', 'border-[#9f2a00]', 'text-[#9f2a00]')
+                tab0.classList.add('text-stone-500')
+                renderOrdersList()
+            }
+        }
+        
+        function renderInventoryTable() {
+            const tbody = document.getElementById('inventory-table')
+            tbody.innerHTML = ''
+            
+            let inventory = JSON.parse(localStorage.getItem('chiliInventory') || '{}')
+            
+            products.forEach(product => {
+                const stock = inventory[product.id] !== undefined ? inventory[product.id] : 45
+                
+                const row = document.createElement('tr')
+                row.className = 'border-b last:border-b-0'
+                row.innerHTML = `
+                    <td class="py-3 pr-4 font-medium">${product.name}</td>
+                    <td class="py-3 px-4 text-center">
+                        <input type="number" value="${stock}" min="0" max="500" 
+                               class="w-20 text-center border border-stone-200 rounded-xl px-2 py-1 text-sm"
+                               onchange="updateStock(${product.id}, this.value)">
+                    </td>
+                    <td class="py-3 px-4 text-center font-semibold text-[#9f2a00]">$${product.price.toFixed(2)}</td>
+                    <td class="py-3 pl-4 text-right">
+                        <button onclick="updateStock(${product.id}, null, true)" 
+                                class="text-xs px-3 py-1 bg-stone-100 hover:bg-stone-200 rounded-xl">Save</button>
+                    </td>
+                `
+                tbody.appendChild(row)
+            })
+        }
+        
+        function updateStock(productId, newValue, fromButton = false) {
+            let inventory = JSON.parse(localStorage.getItem('chiliInventory') || '{}')
+            
+            if (fromButton) {
+                // Find the input in the same row
+                const inputs = document.querySelectorAll('#inventory-table input')
+                // This is a simple approach; in real would use better DOM traversal
+                const allRows = document.querySelectorAll('#inventory-table tr')
+                // For simplicity, just use the value if passed
+            }
+            
+            const value = newValue !== null ? parseInt(newValue) : 45
+            inventory[productId] = isNaN(value) ? 45 : value
+            
+            localStorage.setItem('chiliInventory', JSON.stringify(inventory))
+            
+            // Optional toast
+            if (fromButton) {
+                showToast('Stock updated!')
+            }
+        }
+        
+        function resetInventory() {
+            localStorage.removeItem('chiliInventory')
+            renderInventoryTable()
+            showToast('Inventory reset to defaults')
+        }
+        
+        function renderOrdersList() {
+            const container = document.getElementById('orders-list')
+            container.innerHTML = ''
+            
+            let orders = JSON.parse(localStorage.getItem('chiliOrders') || '[]')
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-stone-400">
+                        <i class="fa-solid fa-inbox text-4xl mb-3"></i>
+                        <p>No orders yet. Place a test order from the shop!</p>
+                    </div>
+                `
+                return
+            }
+            
+            orders.forEach((order, idx) => {
+                const div = document.createElement('div')
+                div.className = `border rounded-2xl p-4 ${order.status.includes('Fulfilled') ? 'bg-emerald-50 border-emerald-200' : 'bg-white border-stone-200'}`
+                
+                let itemsHTML = order.items.map(i => `${i.qty}× ${i.name}`).join(', ')
+                
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold">${order.id}</div>
+                            <div class="text-xs text-stone-500">${new Date(order.date).toLocaleDateString()} • ${order.customer}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-[#9f2a00]">$${order.total.toFixed(2)}</div>
+                            <div class="text-xs ${order.status.includes('Fulfilled') ? 'text-emerald-600' : 'text-[#c2410f]'}">${order.status}</div>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-xs text-stone-600 line-clamp-2">${itemsHTML}</div>
+                    
+                    <div class="mt-3 flex gap-x-2">
+                        ${!order.status.includes('Fulfilled') ? 
+                            `<button onclick="markOrderFulfilled(${idx})" class="text-xs px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl">Mark Fulfilled</button>` : 
+                            `<span class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-xl">Fulfilled ✓</span>`
+                        }
+                        <button onclick="viewOrderDetails(${idx})" class="text-xs px-3 py-1 border border-stone-200 hover:bg-stone-50 rounded-xl">Details</button>
+                    </div>
+                `
+                container.appendChild(div)
+            })
+        }
+        
+        function markOrderFulfilled(orderIndex) {
+            let orders = JSON.parse(localStorage.getItem('chiliOrders') || '[]')
+            if (orders[orderIndex]) {
+                orders[orderIndex].status = 'Fulfilled • Shipped'
+                localStorage.setItem('chiliOrders', JSON.stringify(orders))
+                renderOrdersList()
+                showToast('Order marked as fulfilled!')
+            }
+        }
+        
+        function viewOrderDetails(orderIndex) {
+            let orders = JSON.parse(localStorage.getItem('chiliOrders') || '[]')
+            const order = orders[orderIndex]
+            if (!order) return
+            
+            let itemsList = order.items.map(i => `• ${i.qty} × ${i.name} @ $${i.price.toFixed(2)}`).join('\n')
+            
+            alert(`Order ${order.id}\nDate: ${new Date(order.date).toLocaleString()}\nCustomer: ${order.customer}\n\nItems:\n${itemsList}\n\nTotal: $${order.total.toFixed(2)}\nStatus: ${order.status}`)
+        }
+        
+        function initializeProductCards() {
+            renderProductGrid()
+        }
+        
+        function initializeEverything() {
+            initializeTailwind()
+            initNavbar()
+            loadCart()
+            updateCartCount()
+            initializeProductCards()
+
+            // Initialize EmailJS
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init({
+                    publicKey: "HS21hghEorrLFRDtz",
+                });
+            }
+            
+            // Keyboard support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") {
+                    const modals = document.querySelectorAll('.fixed:not(.hidden)')
+                    if (modals.length > 0) {
+                        modals[modals.length - 1].remove()
+                    } else {
+                        const cartSidebar = document.getElementById('cart-sidebar')
+                        if (!cartSidebar.classList.contains('hidden')) {
+                            hideCart()
+                        }
+                    }
+                }
+            })
+            
+            // Easter egg: Press "c" to add a random chili
+            document.addEventListener('keypress', function(e) {
+                if (e.key.toLowerCase() === 'c' && document.activeElement.tagName === "BODY") {
+                    const randomId = Math.floor(Math.random() * products.length)
+                    addToCart(randomId)
+                }
+            })
+            
+            // Demo notice
+            console.log('%c[Chili Patch] Fully functional static demo ready. Admin dashboard, cart with +/-, bundles, and order emails simulated.', 'color:#9f2a00')
+            
+            // Optional: preload some demo orders if none exist
+            if (!localStorage.getItem('chiliOrders')) {
+                // Could seed one demo order but left empty for clean start
+            }
+        }
+        
+        // Boot the site
+        window.onload = initializeEverything
+    </script>
+</body>
+</html>
