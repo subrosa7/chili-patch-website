@@ -55,6 +55,15 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
         }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            background: #fdfaf3;
+            padding: 12px;
+            border-bottom: 1px solid #f3e8d9;
+        }
         
         .product-card:hover {
             transform: translateY(-6px);
@@ -613,7 +622,7 @@
     <div id="product-modal" onclick="if (event.target.id === 'product-modal') hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl modal">
             <div class="relative">
-                <img id="modal-image" class="w-full h-72 object-cover" alt="">
+                <img id="modal-image" class="w-full h-72 object-contain bg-[#fdfaf3] p-6" alt="">
                 <button onclick="hideProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white w-9 h-9 flex items-center justify-center rounded-2xl text-stone-700">
                     <i class="fa-solid fa-times text-xl"></i>
                 </button>
@@ -1046,7 +1055,7 @@
                 
                 card.innerHTML = `
                     <div class="relative">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-52 object-cover">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
                         ${badgeHTML}
                         <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded-2xl text-xs font-semibold flex items-center gap-x-1">
                             <i class="fa-solid fa-leaf text-[#c2410f]"></i>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed • The Chili Patch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Patrick Hand', 'Inter', system_ui, sans-serif;
+            background-color: #fdfaf3;
+        }
+        
+        .heading-playful {
+            font-family: 'Caveat', 'Playfair Display', Georgia, cursive;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-[#fdfaf3] text-stone-800 flex items-center justify-center min-h-screen p-6">
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 text-center border border-stone-100">
+        <div class="mx-auto w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-6">
+            <i class="fa-solid fa-check text-5xl"></i>
+        </div>
+        
+        <h1 class="text-3xl font-semibold heading-playful text-[#9f2a00]">Thank you, chili friend!</h1>
+        <p class="mt-3 text-stone-600">Your order has been placed successfully. A confirmation email has been sent to you.</p>
+        
+        <div class="mt-6 bg-stone-50 rounded-2xl p-5 text-left text-sm">
+            <div class="flex justify-between mb-2">
+                <span class="text-stone-500">Order #</span>
+                <span class="font-semibold" id="order-id">CP-XXXXXX</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-stone-500">Estimated delivery</span>
+                <span class="font-semibold">3–7 business days</span>
+            </div>
+        </div>
+        
+        <p class="mt-6 text-sm text-stone-500">We'll send you tracking information as soon as your live pepper starts are on their way from Bellvue, Colorado.</p>
+        
+        <div class="mt-8">
+            <a href="index.html" 
+               class="inline-flex items-center justify-center w-full py-4 bg-[#9f2a00] hover:bg-[#7f2000] text-white font-semibold rounded-2xl transition-all">
+                <i class="fa-solid fa-arrow-left mr-2"></i>
+                Back to The Chili Patch
+            </a>
+        </div>
+        
+        <p class="mt-6 text-xs text-stone-400">Questions? Email us at <span class="font-medium text-[#c2410f]">hello@thechilipatch.co</span></p>
+    </div>
+
+    <script>
+        // Show order ID from URL if available
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        if (sessionId) {
+            document.getElementById('order-id').textContent = 'CP-' + sessionId.slice(-6).toUpperCase();
+        } else {
+            document.getElementById('order-id').textContent = 'CP-' + Date.now().toString().slice(-6);
+        }
+    </script>
+</body>
+</html>
